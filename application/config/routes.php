@@ -6,7 +6,11 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['default_controller'] = 'pages/';
 
-$route['(:any)'] = 'pages/index/$1';
+// Pages 
+// $route['(:any)'] = 'pages/index/$1';
+
+// Jenis Material
+$route['jenis-material'] = 'jenis_material';
 
 
 

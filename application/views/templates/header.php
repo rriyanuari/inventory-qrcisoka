@@ -23,7 +23,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
   <link rel="stylesheet" href="<?= base_url(); ?>assets/css/style.css">
   <link rel="stylesheet" href="<?= base_url(); ?>assets/css/components.css">
 
-  <link rel="stylesheet" href="<?= base_url(); ?>assets/modules/summernote/summernote-bs4.css">
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/datatables/datatables.min.css">
 </head>
 
 <body>

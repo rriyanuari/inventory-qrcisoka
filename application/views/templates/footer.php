@@ -24,6 +24,12 @@
 
 <script src="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.js"></script>
 
+<!-- JS Libraies -->
+<script src="<?php echo base_url(); ?>assets/modules/datatables/datatables.min.js"></script>
+
+<!-- Page Specific JS File -->
+<script src="<?php echo base_url(); ?>assets/js/page/modules-datatables.js"></script>
+
 <script>
   $('.summernote').summernote({
     placeholder: 'Isi deskripsi di sini',
