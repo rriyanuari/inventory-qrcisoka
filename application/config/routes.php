@@ -10,7 +10,9 @@ $route['default_controller'] = 'pages/';
 // $route['(:any)'] = 'pages/index/$1';
 
 // Jenis Material
-$route['jenis-material'] = 'jenis_material';
+  $route['jenis-material'] = 'jenis_material';
+  $route['jenis-material/create'] = 'jenis_material/create';
+  $route['jenis-material/delete'] = 'jenis_material/delete';
 
 
 

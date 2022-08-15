@@ -8,22 +8,21 @@
           return $query;
       }
 
-      public function by($collumn, $id){
+      public function by($collumn, $data){
         $query = $this->db  ->select('*')
-                            ->from('lamaran a')
-                            ->join('lowongan b', 'a.id_lowongan=b.id', 'left')
-                            ->where($collumn, $id);
+                            ->from('jenis_material')
+                            ->where($collumn, $data);
         $query = $this->db->get(); 
         return $query;
       }
 
-      public function tambah($data, $table){
-        $query = $this->db->insert($table, $data);
+      public function tambah($data){
+        $query = $this->db->insert('jenis_material', $data);
         return $query;
       }
 
       public function hapus_by_id($id){
-        $query = $this->db->delete('lamaran', array('id' => $id));
+        $query = $this->db->delete('jenis_material', array('id' => $id));
         return $query;
       }
 
