@@ -27,8 +27,6 @@ class Jenis_Material extends CI_Controller
 
   public function create()
   { 
-    $this->load->model('jenis_material_model');
-
      // UPLOAD FOTO
       // SET CONFIG
       $config['upload_path']    = "./public/img/materials";
@@ -44,7 +42,7 @@ class Jenis_Material extends CI_Controller
         if ( !$this->upload->do_upload('file')){
           $status = "error";
           $msg = $this->upload->display_errors();
-          $dataupload = "";
+          $dataupload = NULL;
         }else{
           $dataupload = $this->upload->data();
           $dataupload = $dataupload['file_name'];
@@ -82,12 +80,59 @@ class Jenis_Material extends CI_Controller
     
   }
 
+  public function edit()
+  { 
+    // UPLOAD FOTO
+      // SET CONFIG
+      $config['upload_path']    = "./public/img/materials";
+      $config['allowed_types']  = 'jpg|png|jpeg';
+      $config['max_size']       = '5000';
+      $config['encrypt_name'] = TRUE;
+
+      $this->load->library('upload', $config);
+      // GET DATA
+      $file = $this->input->post('file');
+
+      // SEND DATA TO DB
+        if ( !$this->upload->do_upload('file')){
+          $status = "error";
+          $msg = $this->upload->display_errors();
+          $dataupload = NULL;
+        }else{
+          $dataupload = $this->upload->data();
+          $dataupload = $dataupload['file_name'];
+        }
+    // INSERT DATABASE
+      // GET DATA
+      $nama       = $this->input->post('nama');
+
+      // CHANGE TIMEZONE
+      date_default_timezone_set("Asia/Jakarta");
+
+      // SET DATA
+      $data['nama']              = $nama;
+      $data['satuan']            = $this->input->post('satuan');
+      $data['satuan_konversi']   = $this->input->post('satuan_konversi');
+      $data['nilai_konversi']    = $this->input->post('nilai_konversi');
+      $data['foto']              = $dataupload;
+      $data['last_update']       = date('Y-m-d H:i:s');
+
+      $where['id'] = $this->input->post('id');
+  
+      if($this->jenis_material_model->update_by_id($where, $data)){
+        $status = "success";
+        $msg    = "Jenis material berhasil diubah";
+      } else{
+        $status = "error";
+        $msg = "Kesalahan pada server";
+      }
+
+    $this->output->set_content_type('application/json')->set_output(json_encode(array('status'=>$status,'msg'=>$msg)));
+  }
+
   public function delete()
   { 
-    $this->load->model('jenis_material_model');
-
-
-      // INSERT DATABASE
+    // INSERT DATABASE
       // GET DATA
       $id       = $this->input->post('id');
 
@@ -104,9 +149,5 @@ class Jenis_Material extends CI_Controller
     $this->output->set_content_type('application/json')->set_output(json_encode(array('status'=>$status,'msg'=>$msg)));
     
   }
-
-
-
-  
 
 }

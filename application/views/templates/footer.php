@@ -30,6 +30,12 @@
     <script src="<?php echo base_url(); ?>assets/modules/sweetalert/sweetalert.min.js"></script>
 
     <!-- Page Specific JS File -->
-    <script src="<?php echo base_url(); ?>assets/js/page/modules-datatables.js"></script>
+    <script>
+      $(".datatables").dataTable({
+        // "columnDefs": [
+        //   { "sortable": false, "targets": [1,5] }
+        // ]
+      });
+    </script>
   </body>
 </html>

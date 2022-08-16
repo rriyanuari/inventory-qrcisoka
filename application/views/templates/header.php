@@ -77,13 +77,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
             </a></li>
 
             <li class="menu-header">Loading Material</li>
-            <li class="<?= $this->uri->segment(1) == 'material-masuk' ? 'active' : ''; ?>"><a class="nav-link" href="<?= base_url('material-masuk'); ?>">
+            <li class="<?= $this->uri->segment(1) == 'loading-masuk' ? 'active' : ''; ?>"><a class="nav-link" href="<?= base_url('loading-masuk'); ?>">
               <i class="fas fa-truck-loading"></i> <span>Masuk</span></a>
             </li>
-            <li class="<?= $this->uri->segment(1) == 'material-keluar' ? 'active' : ''; ?>"><a class="nav-link" href="<?= base_url('material-keluar'); ?>">
+            <li class="<?= $this->uri->segment(1) == 'loading-keluar' ? 'active' : ''; ?>"><a class="nav-link" href="<?= base_url('loading-keluar'); ?>">
               <i class="fas fa-truck-moving"></i> <span>Keluar</span></a>
             </li>
-            <li class="<?= $this->uri->segment(1) == 'material-return' ? 'active' : ''; ?>"><a class="nav-link" href="<?= base_url('material-return'); ?>">
+            <li class="<?= $this->uri->segment(1) == 'loading-return' ? 'active' : ''; ?>"><a class="nav-link" href="<?= base_url('loading-return'); ?>">
               <i class="fas fa-undo"></i> <span>Return</span></a>
             </li>
 
