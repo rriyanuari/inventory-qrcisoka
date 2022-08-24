@@ -76,8 +76,7 @@ class Jenis_Material extends CI_Controller
         $status = "error";
         $msg = "Nama jenis material sudah ada";
       }
-    $this->output->set_content_type('application/json')->set_output(json_encode(array('status'=>$status,'msg'=>$msg)));
-    
+    $this->output->set_content_type('application/json')->set_output(json_encode(array('status'=>$status,'msg'=>$msg))); 
   }
 
   public function edit()

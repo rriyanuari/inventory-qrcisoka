@@ -8,10 +8,10 @@
           return $query;
       }
 
-      public function by($collumn, $data){
+      public function by($where){
         $query = $this->db  ->select('*')
                             ->from('material')
-                            ->where($collumn, $data);
+                            ->where($where);
         $query = $this->db->get(); 
         return $query;
       }

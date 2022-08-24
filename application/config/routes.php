@@ -22,7 +22,12 @@ $route['dashboard'] = 'dashboard';
   $route['material'] = 'material';
 
 // Loading Material
-  $route['loading-masuk'] = 'loading/masuk';
+  $route['loading-masuk'] = 'loading_masuk';
+  $route['loading-masuk/create'] = 'loading_masuk/create';
+
+// QR
+  $route['cetak-qr/(:any)'] = 'qr/index/$1';
+
 
 
 

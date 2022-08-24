@@ -25,7 +25,9 @@ class Material extends CI_Controller
     foreach ($jenis_materials as $jenis_material) :
       $item = $jenis_material;
 
-      $item['materials'] = $this->material_model->by('id_jenis_material', $jenis_material['id'])->result_array();
+      $where['id_jenis_material'] = $jenis_material['id'];
+      $where['status'] = 1;
+      $item['materials'] = $this->material_model->by($where)->result_array();
       array_push($data_merge, $item);
     endforeach;
 
@@ -34,7 +36,7 @@ class Material extends CI_Controller
     $this->load->view('templates/header.php', $data);
     $this->load->view('pages/'. $this->page .'.php', $data);
     $this->load->view('templates/footer.php', $data);
-    $this->load->view('functions/'. $this->page .'.php');
+    // $this->load->view('functions/'. $this->page .'.php');
   }
 
 }

@@ -13,16 +13,28 @@
               <div id="accordion" class="card">
                 <div class="accordion mb-5 card-body">
                   <div class="accordion-header collapsed py-4" role="button" data-toggle="collapse" data-target="#panel-body-1" aria-expanded="false">
-                    <h4>Form Loading Masuk</h4>
+                    <h4>Form Permintaan Loading Masuk</h4>
                   </div>
                   <div class="accordion-body collapse" id="panel-body-1" data-parent="#accordion">
                     <div class="row">
                       <div class="form-group col-md-12">
-                        <label>Satuan Unit</label>
-                        <select name="satuan" class="form-control select2" style="width:100%;">
-                          <option value="">-</option>
+                        <label>Jenis Material</label>
+                        <select name="id_jenis_material" class="form-control select2" style="width:100%;">
+                          <?php
+                            foreach ($jenis_materials->result_array() as $jenis_material) :
+                          ?>
+                          <option value="<?= $jenis_material['id']; ?>"><?= $jenis_material['id'] . ' - ' . $jenis_material['nama']; ?></option>
+                          <?php endforeach; ?>
                         </select>
                       </div>
+                      <div class="form-group col-md-12">
+                        <label>Qty</label>
+                        <input type="number" class="form-control" name="qty" placeholder="0" min="0">
+                      </div>
+                      <!-- <div class="form-group col-md-6">
+                        <label>Tgl Kadaluarsa</label>
+                        <input type="date" class="form-control" name="tgl_kadaluarsa" min="<?= date("Y-m-d"); ?>" value="<?= date("Y-m-d"); ?>">
+                      </div> -->
                     </div>
 
                     <button type="submit" class="btn btn-success btn-add">Tambahkan</button>
@@ -35,13 +47,41 @@
                 <table class="table table-striped datatables">
                   <thead>
                     <tr>
-                      <th width="" class="text-center">#</th>
+                      <th width="5%" class="text-center">#</th>
                       <th width="" class="text-center">Jenis Material</th>
-                      <th width="15%" class="text-center">Total Qty</th>
-                      <th width="10%" class="text-center">Action</th>
+                      <th width="15%" class="text-center">Qty</th>
+                      <th width="15%" class="text-center">Tgl Permintaan</th>
+                      <th width="15%" class="text-center">Valid</th>
+                      <th width="15%" class="text-center">Action</th>
                     </tr>
                   </thead>
                   <tbody>
+                    <?php
+                      $no = 0;
+                      foreach($materials as $material):
+                        $no += 1;
+                    ?>
+                      <tr>
+                        <td class="text-center"><?= $no; ?></td>
+                        <td class=""><?= $material['nama_jenis_material']; ?></td>
+                        <td class="text-center"><?= $material['qty']; ?></td>
+                        <td class="text-center"><?= date('d-m-Y | h:i A', strtotime($material['tgl_permintaan'])); ?></td>
+                        <td class="text-center"><?= $material['valid'] . " / " . $material['qty']; ?></td>
+                        <td class="text-center">
+                          <a class="btn btn-primary btn-sm text-light" data-toggle="tooltip" data-original-title="Cetak QR" href="<?= base_url('cetak-qr/') . $material['id'] ?>">
+                            <i class="fas fa-qrcode"></i>
+                            </i>
+                          </a>
+                          <a class="btn btn-success btn-sm text-light" data-toggle="tooltip" data-original-title="Validasi permintaan" href="<?= base_url('admin/barang/qr/') . $material['id'] ?>">
+                            <i class="fas fa-check-circle"></i>
+                            </i>
+                          </a>
+                          <button class="btn btn-sm btn-danger btn-delete" data-toggle="tooltip" data-original-title="Tolak permintaan" id="<?= $jenis_material['id']; ?>">
+                            <i class="fas fa-times-circle"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    <?php endforeach; ?>
                   </tbody>
                 </table>
               </div>
