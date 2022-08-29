@@ -107,7 +107,7 @@ foreach ($jenis_materials as $jenis_material) :
             <thead>
               <tr class="text-center">
                 <td>#</td>
-                <td>Tgl Masuk</td>
+                <td>Tgl Masuk (valid)</td>
                 <td>Tgl Kadaluarsa</td>
                 <td>Qty</td>
                 <td>Qr</td>
@@ -120,8 +120,8 @@ foreach ($jenis_materials as $jenis_material) :
               ?>
                 <tr class="text-center">
                   <td width="5%"><?= $material['id'] ?></td>
-                  <td class="text-right"><?= date('d-m-Y', strtotime($material['tgl_masuk'])); ?></td>
-                  <td class="text-right"><?= date('d-m-Y', strtotime($material['tgl_masuk'])); ?></td>
+                  <td class="text-right"><?= date('d-m-Y', strtotime($material['tgl_valid'])); ?></td>
+                  <td class="text-right"><?= date('d-m-Y', strtotime($material['tgl_kadaluarsa'])); ?></td>
                   <td class="text-right"><?= number_format($material['qty'], 2, ',', '.') ?></td>
                   <td width="10%" class="project-actions align-middle">
                     <a class="btn btn-primary btn-sm text-light" href="<?= base_url('admin/barang/qr/') . $material['id'] ?>">

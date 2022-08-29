@@ -62,7 +62,7 @@
                         $no += 1;
                     ?>
                       <tr>
-                        <td class="text-center"><?= $no; ?></td>
+                        <td class="text-center"><?= $material['id']; ?></td>
                         <td class=""><?= $material['nama_jenis_material']; ?></td>
                         <td class="text-center"><?= $material['qty']; ?></td>
                         <td class="text-center"><?= date('d-m-Y | h:i A', strtotime($material['tgl_permintaan'])); ?></td>
@@ -72,11 +72,11 @@
                             <i class="fas fa-qrcode"></i>
                             </i>
                           </a>
-                          <a class="btn btn-success btn-sm text-light" data-toggle="tooltip" data-original-title="Validasi permintaan" href="<?= base_url('admin/barang/qr/') . $material['id'] ?>">
+                          <a class="btn btn-success btn-sm text-light" data-toggle="tooltip" data-original-title="Validasi permintaan" href="<?= base_url('loading-masuk/validasi/') . $material['id'] ?>">
                             <i class="fas fa-check-circle"></i>
                             </i>
                           </a>
-                          <button class="btn btn-sm btn-danger btn-delete" data-toggle="tooltip" data-original-title="Tolak permintaan" id="<?= $jenis_material['id']; ?>">
+                          <button class="btn btn-sm btn-danger btn-delete" data-toggle="tooltip" data-original-title="Tolak permintaan" id="<?= $material['id']; ?>">
                             <i class="fas fa-times-circle"></i>
                           </button>
                         </td>

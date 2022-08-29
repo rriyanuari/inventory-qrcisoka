@@ -24,6 +24,9 @@ $route['dashboard'] = 'dashboard';
 // Loading Material
   $route['loading-masuk'] = 'loading_masuk';
   $route['loading-masuk/create'] = 'loading_masuk/create';
+  $route['loading-masuk/delete'] = 'loading_masuk/delete';
+  $route['loading-masuk/validasi/(:any)'] = 'loading_masuk/validasi/$1';
+  $route['loading-masuk/validasi-proses'] = 'loading_masuk/validasi_proses';
 
 // QR
   $route['cetak-qr/(:any)'] = 'qr/index/$1';

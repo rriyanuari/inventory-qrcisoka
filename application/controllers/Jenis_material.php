@@ -146,7 +146,6 @@ class Jenis_Material extends CI_Controller
         $msg = "Kesalahan pada server";
       }
     $this->output->set_content_type('application/json')->set_output(json_encode(array('status'=>$status,'msg'=>$msg)));
-    
   }
 
 }

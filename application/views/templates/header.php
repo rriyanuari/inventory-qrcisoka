@@ -12,6 +12,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
   <!-- General CSS Files -->
   <link rel="stylesheet" href="<?= base_url(); ?>assets/modules/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="<?= base_url(); ?>assets/modules/fontawesome/css/all.min.css">
+  <?php 
+    if ($this->uri->segment(2) == 'validasi'){
+      ?> <link rel="stylesheet" href="<?=base_url('assets/qrscan/')?>style.css"> <?php
+    } 
+  ?>
+  
 
   <!-- CSS Libraries -->
   <link rel="stylesheet" href="<?= base_url(); ?>assets/modules/jqvmap/dist/jqvmap.min.css">
@@ -22,6 +28,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
   <!-- Template CSS -->
   <link rel="stylesheet" href="<?= base_url(); ?>assets/css/style.css">
   <link rel="stylesheet" href="<?= base_url(); ?>assets/css/components.css">
+
+  <!-- QR -->
+  <script type="text/javascript" src="<?=base_url('assets/qrscan/')?>js/adapter.min.js"></script>
+  <script type="text/javascript" src="<?=base_url('assets/qrscan/')?>js/vue.min.js"></script>
+  <script type="text/javascript" src="<?=base_url('assets/qrscan/')?>js/instascan.min.js"></script>
 
 </head>
 

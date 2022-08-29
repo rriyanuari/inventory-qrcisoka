@@ -26,7 +26,7 @@
         return $query;
       }
 
-      public function update_by_id($where, $data){
+      public function update_by($where, $data){
         $query =    $this->db->where($where)
                             ->update('material', $data);
         return $query;

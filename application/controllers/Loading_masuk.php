@@ -51,7 +51,7 @@ class Loading_masuk extends CI_Controller
       // SET DATA
       $data['id_jenis_material']      = $this->input->post('id_jenis_material');
       $data['qty']                    = $this->input->post('qty');
-      $data['created_at']             = date('Y-m-d H:i:s');
+      $data['tgl_permintaan']         = date('Y-m-d H:i:s');
       $data['last_update']            = date('Y-m-d H:i:s');
   
       if($this->material_model->tambah($data)){
@@ -60,6 +60,67 @@ class Loading_masuk extends CI_Controller
       } else{
         $status = "error";
         $msg = "Permintaan loading material gagal, silahkan coba lagi";
+      }
+    $this->output->set_content_type('application/json')->set_output(json_encode(array('status'=>$status,'msg'=>$msg))); 
+  }
+
+  public function delete()
+  { 
+    // INSERT DATABASE
+      // GET DATA
+      $id       = $this->input->post('id');
+
+      // SET DATA
+      $data['id'] = $id;
+  
+      if($this->material_model->hapus_by_id($id)){
+        $status = "success";
+        $msg    = "Permintaan loading masuk berhasil ditolak";
+      } else{
+        $status = "error";
+        $msg = "Kesalahan pada server";
+      }
+    $this->output->set_content_type('application/json')->set_output(json_encode(array('status'=>$status,'msg'=>$msg)));
+    
+  }
+
+  public function validasi($id_material)
+  { 
+    $data['title'] = $this->title;
+
+    $where['id'] = $id_material; 
+    
+    $data['material'] = $this->material_model->by($where)->row_array();
+
+    $this->load->view('templates/header.php', $data);
+    $this->load->view('pages/loading-masuk-validasi.php', $data);
+    $this->load->view('templates/footer.php', $data);
+    $this->load->view('functions/loading-masuk-validasi.php');
+  }
+
+  public function validasi_proses()
+  { 
+    // INSERT DATABASE
+      // CHANGE TIMEZONE
+      date_default_timezone_set("Asia/Jakarta");
+
+      // SET DATA
+      $where['id']               = $this->input->post('id');
+
+      $data['status']           = 1;
+      $data['valid']            = $this->input->post('qty');
+      $data['tgl_kadaluarsa']   = $this->input->post('tgl_kadaluarsa');
+      $data['tgl_valid']        = date('Y-m-d H:i:s');
+      $data['last_update']      = date('Y-m-d H:i:s');
+
+
+  
+      if($this->material_model->update_by($where, $data)){
+        $status = "success";
+        $msg    = "Validasi loading material berhasil, material tercatat ke sistem";
+      } else{
+        $status = "error";
+        $msg = "Validasi loading material gagal, silahkan coba lagi";
       }
     $this->output->set_content_type('application/json')->set_output(json_encode(array('status'=>$status,'msg'=>$msg))); 
   }
