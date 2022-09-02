@@ -124,7 +124,7 @@ foreach ($jenis_materials as $jenis_material) :
                   <td class="text-right"><?= date('d-m-Y', strtotime($material['tgl_kadaluarsa'])); ?></td>
                   <td class="text-right"><?= number_format($material['qty'], 2, ',', '.') ?></td>
                   <td width="10%" class="project-actions align-middle">
-                    <a class="btn btn-primary btn-sm text-light" href="<?= base_url('admin/barang/qr/') . $material['id'] ?>">
+                    <a class="btn btn-primary btn-sm text-light" href="<?= base_url('cetak-qr/') . $material['id'] ?>">
                       <i class="fas fa-qrcode">
                       </i>
                     </a>

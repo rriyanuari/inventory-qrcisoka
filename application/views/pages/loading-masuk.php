@@ -72,7 +72,7 @@
                             <i class="fas fa-qrcode"></i>
                             </i>
                           </a>
-                          <a class="btn btn-success btn-sm text-light" data-toggle="tooltip" data-original-title="Validasi permintaan" href="<?= base_url('loading-masuk/validasi/') . $material['id'] ?>">
+                          <a class="btn btn-success btn-sm text-light" data-toggle="tooltip" data-original-title="Validasi permintaan" href="<?= base_url('loading-masuk/scan/') . $material['id'] ?>">
                             <i class="fas fa-check-circle"></i>
                             </i>
                           </a>

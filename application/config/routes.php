@@ -21,12 +21,19 @@ $route['dashboard'] = 'dashboard';
 // Material
   $route['material'] = 'material';
 
-// Loading Material
+// Loading Masuk
   $route['loading-masuk'] = 'loading_masuk';
   $route['loading-masuk/create'] = 'loading_masuk/create';
   $route['loading-masuk/delete'] = 'loading_masuk/delete';
-  $route['loading-masuk/validasi/(:any)'] = 'loading_masuk/validasi/$1';
-  $route['loading-masuk/validasi-proses'] = 'loading_masuk/validasi_proses';
+  $route['loading-masuk/scan/(:any)'] = 'loading_masuk/scan/$1';
+  $route['loading-masuk/scan-proses'] = 'loading_masuk/scan_proses';
+
+// Loading Keluar
+  $route['loading-keluar'] = 'loading_keluar';
+  $route['loading-keluar/create'] = 'loading_keluar/create';
+  $route['loading-keluar/delete'] = 'loading_keluar/delete';
+  $route['loading-keluar/scan'] = 'loading_keluar/scan';
+  $route['loading-keluar/scan-proses'] = 'loading_keluar/scan_proses';
 
 // QR
   $route['cetak-qr/(:any)'] = 'qr/index/$1';

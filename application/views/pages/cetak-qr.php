@@ -36,16 +36,16 @@
               $no = $x;
             }
 
-            if($x % 6 == 1) {
+            if($x % 4 == 1) {
         ?>
-            <tr cols="7">
+            <tr cols="4">
               <td class="m-1 p-1 border text-center">
                 <span style="font-size:12px"><?= $material['id'].'-'.$no; ?></span>
                 <div id="output<?=$no?>"></div> 
               </td>
         <?php
             }
-            elseif($x % 6 == 1){
+            elseif($x % 4 == 1){
         ?>
             <td class="m-1 p-1 border text-center">
               <span style="font-size:12px"><?= $material['id'].'-'.$no; ?></span>
@@ -67,13 +67,13 @@
           $(`#output<?=$no?>`).qrcode({
             render: "canvas", 
             text: `<?= base_url(); ?>/view/<?= $material['id'] ?>/<?=$no?>`, 
-            width: 100, 
-            height: 100,
+            width: 200, 
+            height: 200,
             background: "#ffffff", 
             foreground: "#000000", 
             src: '<?= base_url('public/img/fyfe-background.jpg') ?>',
-            imgWidth: 36,
-            imgHeight: 18
+            imgWidth: 72,
+            imgHeight: 36
           });          
         </script>
         <?php 

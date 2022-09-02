@@ -22,6 +22,20 @@ var app = new Vue({
 
       self.exist = false
 
+      // Validasi benar qr fyfe?
+      if(split_content.length != 8){
+        self.exist = true;
+        var audio = new Audio(`<?=base_url('assets/qrscan/')?>failure.mp3`);
+        audio.play(); 
+
+        iziToast.error({
+          title: 'Oops!',
+          message: 'Qr bukan dari sistem fyfe',
+          position: 'topRight'
+        });
+        return false
+      }
+
       // Validasi qr sudah pernah discan?
       for(var i=0; i < self.scans.length; i++){
         // console.log(self.scans[i].content.toString()+' - '+content.toString());
@@ -41,8 +55,8 @@ var app = new Vue({
       }
 
       // Validasi benar qr material yang dimaksud?
-      if(split_content[6].toString() != '<?= $material['id']; ?>'){
-        console.log(split_content[6].toString());
+      if(split_content[6] != '<?= $material['id']; ?>'){
+        console.log(split_content[6]);
         console.log('<?= $material['id'] ?>')
         self.exist = true;
         var audio = new Audio(`<?=base_url('assets/qrscan/')?>failure.mp3`);
@@ -133,7 +147,7 @@ function simpan(){
   form_data.append('tgl_kadaluarsa', tgl_kadaluarsa.val());
 
   $.ajax({
-      url: '<?php echo base_url('loading-masuk/validasi-proses') ?>',
+      url: '<?php echo base_url('loading-masuk/scan-proses') ?>',
       dataType: 'json', // what to expect back from the PHP script, if anything
       cache: false,
       contentType: false,

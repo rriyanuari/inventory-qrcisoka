@@ -13,7 +13,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
   <link rel="stylesheet" href="<?= base_url(); ?>assets/modules/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="<?= base_url(); ?>assets/modules/fontawesome/css/all.min.css">
   <?php 
-    if ($this->uri->segment(2) == 'validasi'){
+    if ($this->uri->segment(2) == 'scan'){
       ?> <link rel="stylesheet" href="<?=base_url('assets/qrscan/')?>style.css"> <?php
     } 
   ?>
