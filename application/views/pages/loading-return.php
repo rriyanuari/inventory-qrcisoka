@@ -11,11 +11,11 @@
           <div class="card">
             <div class="card-body">
               <div class="d-flex justify-content-end mb-3">
-                <a href="<?= base_url('loading-keluar/scan'); ?>" class="btn btn-success">
+                <a href="<?= base_url('loading-return/scan'); ?>" class="btn btn-success">
                   <i class="fas fa-plus-circle"></i> Scan Qr
                 </a>
               </div>
-              <h4 class="my-3 text-center">Validasi Loading Keluar</h4>
+              <h4 class="my-3 text-center">Validasi Loading Return</h4>
               <div class="table-responsive">
                 <table class="table table-striped datatables">
                   <thead>

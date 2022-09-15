@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Loading_keluar extends CI_Controller
+class Loading_return extends CI_Controller
 {
   public function __construct()
   {
@@ -13,7 +13,7 @@ class Loading_keluar extends CI_Controller
     $this->load->model('loading_model');
     $this->load->model('scan_model');
 
-    $this->page = 'loading-keluar';
+    $this->page = 'loading-return';
     $this->title = ucwords(str_replace('-', ' ', $this->page));
   }
 
@@ -41,9 +41,9 @@ class Loading_keluar extends CI_Controller
     $data['proyeks'] = $this->proyek_model->semua()->result_array();
 
     $this->load->view('templates/header.php', $data);
-    $this->load->view('pages/loading-keluar.php', $data);
+    $this->load->view('pages/loading-return.php', $data);
     $this->load->view('templates/footer.php', $data);
-    $this->load->view('functions/loading-keluar.php');
+    $this->load->view('functions/loading-return.php');
   }
 
   public function validasi()

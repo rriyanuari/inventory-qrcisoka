@@ -8,6 +8,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
   <title><?= $title; ?> - Inventory Qr Cisoka</title>
+  <link rel="icon" type="image/x-icon" href="<?= base_url('public/img/fyfe-background-icon.png') ?>">
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="<?= base_url(); ?>assets/modules/bootstrap/css/bootstrap.min.css">
@@ -80,6 +81,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
             </li>
 
             <li class="menu-header">Master Data</li>
+            <li class="<?= $this->uri->segment(1) == 'proyek' ? 'active' : ''; ?>"><a class="nav-link" href="<?= base_url('proyek'); ?>">
+              <i class="fas fa-map-marked-alt"></i> <span>Proyek</span></a>
+            </li>
             <li class="<?= $this->uri->segment(1) == 'jenis-material' ? 'active' : ''; ?>"><a class="nav-link" href="<?= base_url('jenis-material'); ?>">
               <i class="fas fa-box"></i> <span>Jenis Material</span></a>
             </li>
@@ -99,8 +103,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
             </li>
 
             <li class="menu-header">Laporan</li>
-            <li class="<?= $this->uri->segment(1) == 'kartu-stock' ? 'active' : ''; ?>"><a class="nav-link" href="<?= base_url(); ?>admin/kartu-stock">
-              <i class="fas fa-clipboard-list"></i> <span>Kartu Stock</span></a>
+            <li class="<?= $this->uri->segment(1) == 'laporan-bulanan' ? 'active' : ''; ?>"><a class="nav-link" href="<?= base_url('laporan-bulanan'); ?>">
+              <i class="fas fa-clipboard-list"></i> <span>Laporan Bulanan</span></a>
             </li>
 
           </ul>

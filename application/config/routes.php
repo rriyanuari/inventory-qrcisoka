@@ -12,6 +12,12 @@ $route['default_controller'] = 'pages/';
 // Dashboard
 $route['dashboard'] = 'dashboard';
 
+// List Proyek
+  $route['proyek'] = 'proyek';
+  $route['proyek/create'] = 'proyek/create';
+  $route['proyek/edit'] = 'proyek/edit';
+  $route['proyek/delete'] = 'proyek/delete';
+
 // Jenis Material
   $route['jenis-material'] = 'jenis_material';
   $route['jenis-material/create'] = 'jenis_material/create';
@@ -20,6 +26,9 @@ $route['dashboard'] = 'dashboard';
 
 // Material
   $route['material'] = 'material';
+
+// QR
+  $route['cetak-qr/(:any)'] = 'qr/index/$1';
 
 // Loading Masuk
   $route['loading-masuk'] = 'loading_masuk';
@@ -30,13 +39,23 @@ $route['dashboard'] = 'dashboard';
 
 // Loading Keluar
   $route['loading-keluar'] = 'loading_keluar';
-  $route['loading-keluar/create'] = 'loading_keluar/create';
+  $route['loading-keluar/validasi'] = 'loading_keluar/validasi';
   $route['loading-keluar/delete'] = 'loading_keluar/delete';
   $route['loading-keluar/scan'] = 'loading_keluar/scan';
   $route['loading-keluar/scan-proses'] = 'loading_keluar/scan_proses';
 
-// QR
-  $route['cetak-qr/(:any)'] = 'qr/index/$1';
+// Loading Return
+  $route['loading-return'] = 'loading_return';
+  $route['loading-return/validasi'] = 'loading_return/validasi';
+  $route['loading-return/delete'] = 'loading_return/delete';
+  $route['loading-return/scan'] = 'loading_return/scan';
+  $route['loading-return/scan-proses'] = 'loading_return/scan_proses';
+
+// Laporan
+  $route['laporan-bulanan'] = 'laporan';
+  $route['laporan-bulanan/cetak'] = 'laporan/cetak';
+
+
 
 
 
