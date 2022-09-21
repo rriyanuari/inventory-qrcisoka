@@ -19,7 +19,7 @@ class Qr extends CI_Controller
     $data['title'] = $this->title . " | " . $id_material;
 
 
-    $where['id'] = $id_material;
+    $where['a.id'] = $id_material;
     $data['material'] = $this->material_model->by($where)->row_array();
 
     // $this->load->view('templates/header.php', $data);

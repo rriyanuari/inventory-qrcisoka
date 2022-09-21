@@ -142,7 +142,8 @@ function simpan(){
     }
 
   var form_data = new FormData();
-  form_data.append('id', $("#id_material").val());
+  form_data.append('id_material', $("#id_material").val());
+  form_data.append('id_jenis_material', $("#id_jenis_material").val());
   form_data.append('qty', $("#qty_material").html());
   form_data.append('tgl_kadaluarsa', tgl_kadaluarsa.val());
 

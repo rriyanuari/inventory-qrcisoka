@@ -7,17 +7,28 @@
     <div class="section-body">
       <div class="container-fluid">
         <div class="d-flex align-items-center justify-content-between">
-          <div class="form-group col-md-6">
-            <label> ID Material : </label> 
-            <input type="text" size="5" class="form-control" id="id_material" value="<?=$material['id']?>" disabled> 
+          <div class="form-group col-md-2">
+            <label> ID Jenis Material : </label>
+            <input type="text" size="5" class="form-control" id="id_jenis_material" value="<?= $material['id_jenis_material']; ?>" disabled>
           </div>
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-4">
+            <label> </label>
+            <input type="text" size="5" class="form-control" id="jenis_material" value="<?= $material['nama']; ?>" disabled>
+          </div>
+          <div class="form-group col-md-2">
+            <label> ID Material : </label>
+            <input type="text" size="5" class="form-control" id="id_material" value="<?= $material['id'] ?>" disabled>
+          </div>
+          <div class="form-group col-md-4">
             <label>Tgl Kadaluarsa</label>
             <input type="date" class="form-control" name="tgl_kadaluarsa" min="<?= date("Y-m-d"); ?>">
           </div>
         </div>
 
         <div id="app" class="app_qr">
+          <div class="preview-container">
+            <video id="preview" style="height: 90%;"></video>
+          </div>
           <div class="sideApp">
             <section class="cameras">
               <h5 class="bg-primary text-light p-2">Cameras</h5>
@@ -47,9 +58,6 @@
               </transition-group>
             </section>
             <div id="autoSave"></div>
-          </div>
-          <div class="preview-container">
-            <video id="preview" style="height: 90%;"></video>
           </div>
         </div>
 

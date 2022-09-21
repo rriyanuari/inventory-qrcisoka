@@ -36,6 +36,7 @@
         // "columnDefs": [
         //   { "sortable": false, "targets": [1,5] }
         // ]
+        'iDisplayLength': 100,
       });
     </script>
   </body>

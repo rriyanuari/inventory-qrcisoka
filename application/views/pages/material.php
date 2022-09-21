@@ -18,8 +18,8 @@
                     <tr>
                       <th width="" class="text-center">#</th>
                       <th width="" class="text-center">Jenis Material</th>
-                      <th width="15%" class="text-center">Total Qty</th>
-                      <th width="10%" class="text-center">Action</th>
+                      <th width="" class="text-center">Total Qty</th>
+                      <th width="" class="text-center">Action</th>
                     </tr>
                   </thead>
                   <tbody>

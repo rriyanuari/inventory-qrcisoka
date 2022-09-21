@@ -3,14 +3,19 @@
   class Material_model extends CI_Model {
 
       public function semua(){
-          $query = $this->db  ->select('*')
-                              ->get('material');
+          $query = $this->db  ->select('a.id, a.id_jenis_material, a.qty, a.status, a.valid, a.tgl_kadaluarsa, a.tgl_valid, a.tgl_permintaan, a.last_update,
+                                        b.nama, b.satuan')
+                              ->from('material a')
+                              ->join('jenis_material b', 'a.id_jenis_material = b.id');
+          $query = $this->db->get(); 
           return $query;
       }
 
       public function by($where){
-        $query = $this->db  ->select('*')
-                            ->from('material')
+        $query = $this->db  ->select('a.id, a.id_jenis_material, a.qty, a.status, a.valid, a.tgl_kadaluarsa, a.tgl_valid, a.tgl_permintaan, a.last_update,
+                                    b.nama, b.satuan')
+                            ->from('material a')
+                            ->join('jenis_material b', 'a.id_jenis_material = b.id')
                             ->where($where);
         $query = $this->db->get(); 
         return $query;
