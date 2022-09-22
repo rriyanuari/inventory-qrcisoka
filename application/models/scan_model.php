@@ -16,6 +16,16 @@
         return $query;
       }
 
+      public function where_group_by($where, $group_by){
+        $query = $this->db  ->select('id_jenis_material, id_material, COUNT(`'.$group_by.'`) AS qty')
+                            ->from('scan a')
+                            ->join('material b', 'a. id_material = b.id', 'left')
+                            ->group_by($group_by)
+                            ->where($where);
+        $query = $this->db->get(); 
+        return $query;
+      }
+
       public function tambah($data){
         $query = $this->db->insert('scan', $data);
         return $query;

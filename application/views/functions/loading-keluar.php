@@ -4,7 +4,7 @@
     let id  = this.id
 
     let id_proyek = $(`select[name='id_proyek${id}']`);
-    let keterangan = $(`input[name=keterangan${id}]`);
+    let keterangan = $(`textarea[name=keterangan${id}]`);
 
     if (!id_proyek.val().trim()) {
       iziToast.error({
@@ -37,7 +37,6 @@
           })
         } else {
           swal('Error', `${data.msg}`, 'error');
-          nama.focus();
         }
         console.log(data);
       },

@@ -36,4 +36,9 @@
                             ->update('material a', $data);
         return $query;
       }	
+
+      public function loading_keluar($id, $qty){
+        $query =    $this->db->query("call prosedur_loading_keluar($id, $qty)");
+        return $query;
+      }	
     }
