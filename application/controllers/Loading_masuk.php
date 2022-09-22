@@ -11,6 +11,7 @@ class Loading_masuk extends CI_Controller
     $this->load->model('jenis_material_model');
     $this->load->model('material_model');
     $this->load->model('loading_model');
+    $this->load->model('loading_detail_model');
 
     $this->page = 'loading-masuk';
     $this->title = ucwords(str_replace('-', ' ', $this->page));
@@ -125,14 +126,14 @@ class Loading_masuk extends CI_Controller
       $data_loading_detail['total_qty_awal']  = 0;
 
       $where_material1['a.id_jenis_material']     = $id_jenis_material;
-      $where_material1['a.status']                 = 0;
+      $where_material1['a.status']                = 1;
       $materials = $this->material_model->by($where_material1)->result_array();
 
       foreach ($materials as $material) {
         $data_loading_detail['total_qty_awal']  += $material['qty'];
       }
 
-      $where_material2['a.id_material']     = $id_material;
+      $where_material2['a.id']     = $id_material;
       $material = $this->material_model->by($where_material2)->row_array();
 
       $data_loading_detail['qty_loading']  = $material['qty'];

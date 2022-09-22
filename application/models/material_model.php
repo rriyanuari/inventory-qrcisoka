@@ -33,7 +33,7 @@
 
       public function update_by($where, $data){
         $query =    $this->db->where($where)
-                            ->update('material', $data);
+                            ->update('material a', $data);
         return $query;
       }	
     }

@@ -68,7 +68,7 @@
                         <td class="text-center"><?= date('d-m-Y | h:i A', strtotime($material['tgl_permintaan'])); ?></td>
                         <td class="text-center"><?= $material['valid'] . " / " . $material['qty']; ?></td>
                         <td class="text-center">
-                          <a class="btn btn-primary btn-sm text-light" data-toggle="tooltip" data-original-title="Cetak QR" href="<?= base_url('cetak-qr/') . $material['id'] ?>">
+                          <a class="btn btn-primary btn-sm text-light" data-toggle="tooltip" data-original-title="Cetak QR" href="<?= base_url('cetak-qr/') . $material['id'] ?>" target="_blank">
                             <i class="fas fa-qrcode"></i>
                             </i>
                           </a>
