@@ -5,10 +5,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
   <title><?= $title; ?> - Inventory Qr Cisoka</title>
-
+  <link rel="icon" type="image/x-icon" href="<?= base_url('public/img/fyfe-background-icon.png') ?>">
+  
   <!-- General CSS Files -->
   <link rel="stylesheet" href="<?= base_url(); ?>assets/modules/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="<?= base_url(); ?>assets/modules/fontawesome/css/all.min.css">

@@ -19,12 +19,17 @@
           <div class="card">
             <div class="card-body">
               <div class="d-flex">
-                <p>Periode : Agustus 2022</p>
+                <?php
+                  if ($periode) {
+                    echo "<p>Periode : " . $periode . "</p>";
+                  }
+                ?>
+                <!-- <p>Periode : Agustus 2022</p> -->
                 <div class="ml-auto  mb-3">
                 </div>
               </div>
               <div class="table-responsive">
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered datatables">
                   <thead>
                     <tr>
                       <th width="" class="text-center">#</th>
@@ -40,38 +45,80 @@
                   <tbody>
                     <?php
                     $no = 1;
-                    foreach ($jenis_materials as $jenis_material) :
 
-                      $total_qty = 0;
-                      foreach ($jenis_material['materials'] as $material) :
-                        $total_qty += $material['qty'];
+                    if ($jenis_materials) {
+
+                      // print("<pre>".print_r($jenis_materials,true)."</pre>");
+                      foreach ($jenis_materials as $jenis_material) :
+                        $stock_awal    = 0;
+                        $stock_akhir   = 0;
+                        $in   = 0;
+                        $out   = 0;
+
+                        foreach ($jenis_material['materials'] as $material) :
+
+                          if ($material['loadings'] != null) {
+
+                            $loading_length = count($material['loadings']);
+
+                            $stock_awal   = $material['loadings'][0]['total_qty_awal'];
+                            $stock_akhir  = $material['loadings'][$loading_length - 1]['total_qty_akhir'];
+
+                            foreach ($material['loadings'] as $loading) :
+                              // print("<pre>".print_r($loading, true)."</pre>");
+
+                              if ($loading['type'] == 'Masuk') {
+                                $in += $loading['qty_loading'];
+                              }
+
+                              if ($loading['type'] == 'Keluar') {
+                                $out += $loading['qty_loading'];
+                              }
+
+                            endforeach;
+                          }
+
+                        endforeach;
+
+                        ?>
+                          <tr>
+                            <td class="align-middle text-center"><?= $jenis_material['id']; ?></td>
+                            <td class="align-middle"><?= $jenis_material['nama']; ?></td>
+                            <td class="align-middle text-center"><?= $jenis_material['satuan']; ?></td>
+                            <td class="align-middle text-center"><?= number_format($stock_awal, 2, ',', '.'); ?></td>
+                            <td class="align-middle text-center"><?= number_format($in, 2, ',', '.'); ?></td>
+                            <td class="align-middle text-center"><?= number_format($out, 2, ',', '.'); ?></td>
+                            <td class="align-middle text-center"><?= number_format($stock_akhir, 2, ',', '.'); ?></td>
+                            <td class="align-middle text-right">
+                            <?php
+                            if ($out != 0) {
+                            ?>
+                              <?php
+                              foreach ($jenis_material['materials'] as $material) : ?>
+                                <p>
+                                  <?= number_format($material['qty'], 2, ',', '.'); ?> || <em><?= $material['tgl_kadaluarsa']; ?></em>
+                                </p>
+                              <?php endforeach ?>
+                            <?php } ?>
+                          </td>
+                          </tr>
+                        <?php
+                        $no++;
                       endforeach;
-                    ?>
+                    }
+                    else{
+                      ?>
                       <tr>
-                        <td class="align-middle text-center"><?= $jenis_material['id']; ?></td>
-                        <td class="align-middle"><?= $jenis_material['nama']; ?></td>
-                        <td class="align-middle text-center"><?= $jenis_material['satuan']; ?></td>
-                        <td class="align-middle text-center"><?= number_format($total_qty, 2, ',', '.'); ?></td>
-                        <td class="align-middle text-center"><?= number_format($total_qty, 2, ',', '.'); ?></td>
-                        <td class="align-middle text-center"><?= number_format($total_qty, 2, ',', '.'); ?></td>
-                        <td class="align-middle text-center"><?= number_format($total_qty, 2, ',', '.'); ?></td>
-                        <td class="align-middle text-right">
-                          <?php
-                            foreach($jenis_material['materials'] as $material): ?>
-                              <p>
-                                <?= number_format($material['qty'], 2, ',', '.'); ?> || <em><?= $material['tgl_kadaluarsa']; ?></em>
-                              </p>
-                          <?php endforeach ?>
+                        <td colspan="8" class="text-center">
+                          <em>-- Silahkan pilih periode terlebih dahulu --</em>
                         </td>
                       </tr>
-                    <?php
-                      $no++;
-                    endforeach;
+                      <?php
+                    }
                     ?>
 
                   </tbody>
                 </table>
-
               </div>
             </div>
           </div>

@@ -16,8 +16,7 @@
                   <?php
                   // date("Y-m", strtotime(date("Y-m-d"). ' - 1 months')); 
                   ?>
-                  <input type="month" name="periode" class="form-control" max="<?= date("Y-m"); ?>"
-                  value="<?= ($periode) ? date('Y-m', strtotime($periode)) : ""; ?>">
+                  <input type="month" name="periode" class="form-control" max="<?= date("Y-m"); ?>" value="<?= ($periode) ? date('Y-m', strtotime($periode)) : ""; ?>">
                 </div>
 
                 <div class="col-md-6">
@@ -27,15 +26,14 @@
                 </div>
               </div>
               <div class="d-flex">
-                <?php 
-                  if($periode){
-                    echo "<h5>Periode : " . $periode . "</h5>";
-                  } 
-                ?> 
+                <?php
+                if ($periode) {
+                  echo "<h5>Periode : " . $periode . "</h5>";
+                }
+                ?>
                 <div class="d-flex ml-auto mb-3">
 
-                  <a class="btn btn-primary text-light" href="<?= base_url('laporan-bulanan/cetak') ?>"
-                      target="_blank" data-toggle="tooltip" data-original-title="Cetak Laporan">
+                  <a class="btn btn-primary text-light" href="<?= base_url('laporan-bulanan/cetak/?periode=') . date('Y-m', strtotime($periode)); ?>" target="_blank" data-toggle="tooltip" data-original-title="Cetak Laporan">
                     <i class="fas fa-print">
                     </i>
                   </a>
@@ -93,36 +91,39 @@
 
                         endforeach;
 
-                        ?>
-                          <tr>
-                            <td class="align-middle text-center"><?= $jenis_material['id']; ?></td>
-                            <td class="align-middle"><?= $jenis_material['nama']; ?></td>
-                            <td class="align-middle text-center"><?= $jenis_material['satuan']; ?></td>
-                            <td class="align-middle text-center"><?= number_format($stock_awal, 2, ',', '.'); ?></td>
-                            <td class="align-middle text-center"><?= number_format($in, 2, ',', '.'); ?></td>
-                            <td class="align-middle text-center"><?= number_format($out, 2, ',', '.'); ?></td>
-                            <td class="align-middle text-center"><?= number_format($stock_akhir, 2, ',', '.'); ?></td>
-                            <td class="align-middle text-right">
+                    ?>
+                        <tr>
+                          <td class="align-middle text-center"><?= $jenis_material['id']; ?></td>
+                          <td class="align-middle"><?= $jenis_material['nama']; ?></td>
+                          <td class="align-middle text-center"><?= $jenis_material['satuan']; ?></td>
+                          <td class="align-middle text-center"><?= number_format($stock_awal, 2, ',', '.'); ?></td>
+                          <td class="align-middle text-center"><?= number_format($in, 2, ',', '.'); ?></td>
+                          <td class="align-middle text-center"><?= number_format($out, 2, ',', '.'); ?></td>
+                          <td class="align-middle text-center"><?= number_format($stock_akhir, 2, ',', '.'); ?></td>
+                          <td class="align-middle text-right">
+                            <?php
+                            if ($out != 0) {
+                            ?>
                               <?php
                               foreach ($jenis_material['materials'] as $material) : ?>
                                 <p>
                                   <?= number_format($material['qty'], 2, ',', '.'); ?> || <em><?= $material['tgl_kadaluarsa']; ?></em>
                                 </p>
                               <?php endforeach ?>
-                            </td>
-                          </tr>
-                        <?php
+                            <?php } ?>
+                          </td>
+                        </tr>
+                      <?php
                         $no++;
                       endforeach;
-                    }
-                    else{
+                    } else {
                       ?>
                       <tr>
                         <td colspan="8" class="text-center">
                           <em>-- Silahkan pilih periode terlebih dahulu --</em>
                         </td>
                       </tr>
-                      <?php
+                    <?php
                     }
                     ?>
 
@@ -135,91 +136,3 @@
       </div>
   </section>
 </div>
-
-
-<?php
-foreach ($jenis_materials as $jenis_material) :
-  $path_foto = ($jenis_material['foto']) ? ($jenis_material['foto']) : 'product_default.png';
-
-  $total_qty = 0;
-  foreach ($jenis_material['materials'] as $material) :
-    $total_qty += $material['qty'];
-  endforeach;
-?>
-  <!-- MODAL DETAIL -->
-  <div class="modal fade" id="detail_modal<?= $jenis_material['id'] ?>">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header bg-primary text-light">
-          <h4 class="modal-title">Detail Jenis Material <?= $jenis_material['id'] ?></h4>
-          <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="row mb-3">
-            <div class="col-md-4 text-center">
-              <img src="<?= base_url('public/img/materials/') . $path_foto; ?>" width="100px">
-            </div>
-            <div class="col-md-8">
-              <table width="100%">
-                <tr class="row py-2 font-weight-bold">
-                  <td width="30%">Jenis Barang</td>
-                  <td width="70%">: <?= $jenis_material['id'] . ' - ' . $jenis_material['nama'] ?></td>
-                </tr>
-                <tr class="row py-2">
-                  <td width="30%">Satuan</td>
-                  <td width="70%">: <?= $jenis_material['satuan'] ?></td>
-                </tr>
-                <tr class="row py-2">
-                  <td width="30%">Total Qty</td>
-                  <td width="70%">: <?= $total_qty ?></td>
-                </tr>
-              </table>
-              <hr>
-            </div>
-          </div>
-          <div class="bg-primary text-light">
-            <h5 class="text-center py-2 mb-3">List Material</h5 class="text-center">
-          </div>
-          <table class="table table-striped datatables" width="100%" bordered>
-            <thead>
-              <tr class="text-center">
-                <td>#</td>
-                <td>Tgl Masuk (valid)</td>
-                <td>Tgl Kadaluarsa</td>
-                <td>Qty</td>
-                <td>Qr</td>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-              foreach ($jenis_material['materials'] as $material) :
-                $total_qty += $material['qty'];
-              ?>
-                <tr class="text-center">
-                  <td width="5%"><?= $material['id'] ?></td>
-                  <td class="text-right"><?= date('d-m-Y', strtotime($material['tgl_valid'])); ?></td>
-                  <td class="text-right"><?= date('d-m-Y', strtotime($material['tgl_kadaluarsa'])); ?></td>
-                  <td class="text-right"><?= number_format($material['qty'], 2, ',', '.') ?></td>
-                  <td width="10%" class="project-actions align-middle">
-                    <a class="btn btn-primary btn-sm text-light" href="<?= base_url('cetak-qr/') . $material['id'] ?>">
-                      <i class="fas fa-qrcode">
-                      </i>
-                    </a>
-                  </td>
-                </tr>
-              <?php endforeach; ?>
-            </tbody>
-          </table>
-        </div>
-        <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
-  <!-- /.MODAL DETAIL -->
-<?php endforeach; ?>
