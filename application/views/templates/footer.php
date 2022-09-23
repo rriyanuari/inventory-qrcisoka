@@ -29,6 +29,7 @@
     <script src="<?php echo base_url(); ?>assets/modules/select2/dist/js/select2.full.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/modules/sweetalert/sweetalert.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/modules/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="<?php echo base_url(); ?>assets/modules/chart.min.js"></script>
 
     <!-- Page Specific JS File -->
     <script>

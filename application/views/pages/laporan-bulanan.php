@@ -32,11 +32,12 @@
                 }
                 ?>
                 <div class="d-flex ml-auto mb-3">
-
+                  <?php if($periode != null){ ?>
                   <a class="btn btn-primary text-light" href="<?= base_url('laporan-bulanan/cetak/?periode=') . date('Y-m', strtotime($periode)); ?>" target="_blank" data-toggle="tooltip" data-original-title="Cetak Laporan">
                     <i class="fas fa-print">
                     </i>
                   </a>
+                  <?php } ?>
                 </div>
               </div>
               <div class="table-responsive">

@@ -11,6 +11,7 @@ $route['default_controller'] = 'pages/';
 
 // Dashboard
 $route['dashboard'] = 'dashboard';
+$route['dashboard/get-data'] = 'dashboard/get_data';
 
 // List Proyek
   $route['proyek'] = 'proyek';

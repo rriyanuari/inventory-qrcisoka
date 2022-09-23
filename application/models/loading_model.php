@@ -3,9 +3,13 @@
   class loading_model extends CI_Model {
 
       public function semua(){
-          $query = $this->db  ->select('*')
-                              ->get('loading');
-          return $query;
+        $query = $this->db  ->select('b.id, a.id_material, b.type, b.tgl_valid, 
+                                      a.total_qty_awal, a.qty_loading, a.total_qty_akhir')
+                            ->from('loading_detail a')
+                            ->join('loading b', 'a.id_loading = b.id', 'left')
+                            ->order_by('b.tgl_valid', 'DESC');
+        $query = $this->db->get(); 
+        return $query;
       }
 
       public function last_id(){
@@ -30,6 +34,16 @@
                             ->join('loading b', 'a.id_loading = b.id', 'left')
                             ->where('a.id_material = ' . $id)  
                             ->where("DATE_FORMAT(b.tgl_valid,'%Y-%m') = ", $periode);
+        $query = $this->db->get(); 
+        return $query;
+      }
+
+      public function laporan_tahunan($id){
+        $query = $this->db  ->select('b.id, a.id_material, b.type, b.tgl_valid, 
+                                      a.total_qty_awal, a.qty_loading, a.total_qty_akhir')
+                            ->from('loading_detail a')
+                            ->join('loading b', 'a.id_loading = b.id', 'left')
+                            ->where('a.id_material = ' . $id);
         $query = $this->db->get(); 
         return $query;
       }
