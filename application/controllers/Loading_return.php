@@ -18,32 +18,48 @@ class Loading_return extends CI_Controller
   }
 
   public function index()
-  { 
+  {
     $data['title'] = $this->title;
+    $data['jenis_materials'] = $this->jenis_material_model->semua();
+    $data['proyeks'] = $this->proyek_model->semua();
 
-    $where_loading['is_valid'] = 0;
-    $loadings = $this->loading_model->by($where_loading)->result_array();
+    $where['status'] = 0;
+    $materials = $this->material_model->by($where)->result_array();
 
     $data_merge = array();
 
-    foreach ($loadings as $loading) :
-      $item = $loading;
+    foreach ($materials as $material) :
+      $item = $material;
 
-      $where_scan['id_loading'] = $loading['id'];
-      $scans = $this->scan_model->by_and_join($where_scan)->result_array();
-
-      $item['scans'] = $scans;
-
+      $where2['id'] = $material['id_jenis_material'];
+      $jenis_material = $this->jenis_material_model->by($where2)->row_array();
+      $item['nama_jenis_material'] = $jenis_material['nama'];
       array_push($data_merge, $item);
     endforeach;
 
-    $data['loadings'] = $data_merge;
-    $data['proyeks'] = $this->proyek_model->semua()->result_array();
+    $data['materials'] = $data_merge;
 
     $this->load->view('templates/header.php', $data);
     $this->load->view('pages/loading-return.php', $data);
     $this->load->view('templates/footer.php', $data);
     $this->load->view('functions/loading-return.php');
+  }
+
+  public function get_data()
+  { 
+    // INSERT DATABASE
+
+      // SET DATA
+      $where_jenis_material['id']  = $this->input->post('id_jenis_material');
+  
+      if($this->jenis_material_model->by($where_jenis_material)){
+        $status = "success";
+        $return = $this->jenis_material_model->by($where_jenis_material)->row_array();
+      } else{
+        $status = "error";
+        $return = "Gagal mendapatkan data";
+      }
+    $this->output->set_content_type('application/json')->set_output(json_encode(array('status'=>$status,'return'=>$return))); 
   }
 
   public function validasi()

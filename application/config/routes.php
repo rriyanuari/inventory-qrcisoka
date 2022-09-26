@@ -51,6 +51,7 @@ $route['dashboard/get-data'] = 'dashboard/get_data';
   $route['loading-return/delete'] = 'loading_return/delete';
   $route['loading-return/scan'] = 'loading_return/scan';
   $route['loading-return/scan-proses'] = 'loading_return/scan_proses';
+  $route['loading-return/get-data'] = 'loading_return/get_data';
 
 // Laporan
   $route['laporan-bulanan'] = 'laporan';

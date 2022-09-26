@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>DB-qrcisoka | QR Code</title>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title><?= $title; ?> - Inventory Qr Cisoka</title>
+  <link rel="icon" type="image/x-icon" href="<?= base_url('public/img/fyfe-background-icon.png') ?>">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="<?= base_url(); ?>assets/modules/bootstrap/css/bootstrap.min.css">
   <!-- <link rel="stylesheet" href="<?= base_url(); ?>assets/modules/fontawesome/css/all.min.css"> -->
