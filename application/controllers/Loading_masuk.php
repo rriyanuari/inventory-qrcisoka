@@ -8,18 +8,16 @@ class Loading_masuk extends CI_Controller
   {
     parent::__construct();
 
-    $this->load->model('jenis_material_model');
-    $this->load->model('material_model');
-    $this->load->model('loading_model');
-    $this->load->model('loading_detail_model');
-    $this->load->model('permintaan_model');
-
     $this->page = 'loading-masuk';
     $this->title = ucwords(str_replace('-', ' ', $this->page));
   }
 
-  public function index()
+  public function index() // Revised
   {
+    $this->load->model('jenis_material_model');
+    $this->load->model('material_model');
+    $this->load->model('loading_model');
+
     $data['title'] = $this->title;
     $data['jenis_materials'] = $this->jenis_material_model->semua();
 
@@ -30,7 +28,7 @@ class Loading_masuk extends CI_Controller
     foreach ($loadings as $loading) :
       $item = $loading;
 
-      $material = $this->material_model->by([
+      $material = $this->material_model->permintaan_validasi([
         'material.id' => $loading['id_material']
       ])->row_array();
 
@@ -46,9 +44,13 @@ class Loading_masuk extends CI_Controller
     $this->load->view('functions/loading-masuk.php');
   }
 
-  public function create()
+  public function create() // Revised
   {
-    // INSERT DATABASE
+
+    $this->load->model('material_model');
+    $this->load->model('loading_model');
+    $this->load->model('loading_detail_model');
+
     // CHANGE TIMEZONE
     date_default_timezone_set("Asia/Jakarta");
 
@@ -104,14 +106,14 @@ class Loading_masuk extends CI_Controller
     $this->output->set_content_type('application/json')->set_output(json_encode(array('status' => $status, 'msg' => $msg)));
   }
 
-  public function delete()
+  public function delete() // Revised
   {
-    // GET DATA
-    $id_loading = $this->input->post('id');
-
+    $this->load->model('material_model');
+    $this->load->model('loading_model');
+    
     // GET DATA -> DB -> LOADING BY ID
     $loading = $this->loading_model->by([
-      'loading.id' => $id_loading
+      'loading.id' => $this->input->post('id')
     ])->row_array();
 
     // GET DATA -> DB -> MATERIAL BY ID
@@ -137,8 +139,11 @@ class Loading_masuk extends CI_Controller
     $this->output->set_content_type('application/json')->set_output(json_encode(array('status' => $status, 'msg' => $msg)));
   }
 
-  public function scan($id_loading)
+  public function scan($id_loading) // Revised
   {
+    $this->load->model('loading_model');
+    $this->load->model('material_model');
+    
     $data['title'] = $this->title;
 
     // GET DATA -> DB -> LOADING BY ID
@@ -157,8 +162,12 @@ class Loading_masuk extends CI_Controller
     $this->load->view('functions/loading-masuk-scan.php');
   }
 
-  public function scan_proses()
+  public function scan_proses() // Revised
   {
+    $this->load->model('loading_model');
+    $this->load->model('material_model');
+    
+    
     // CHANGE TIMEZONE
     date_default_timezone_set("Asia/Jakarta");
 

@@ -20,6 +20,16 @@
 
       public function by($where){
         $query = $this->db  ->select('material.id, material.id_jenis_material, material.qty, material.tgl_kadaluarsa,
+                                      jenis_material.nama, jenis_material.satuan')
+                            ->from('material')
+                            ->join('jenis_material', 'material.id_jenis_material = jenis_material.id')
+                            ->where($where);
+        $query = $this->db->get(); 
+        return $query;
+      }
+
+      public function permintaan_validasi($where){
+        $query = $this->db  ->select('material.id, material.id_jenis_material, material.qty, material.tgl_kadaluarsa,
                                       jenis_material.nama, jenis_material.satuan, loading.tgl_valid')
                             ->from('material')
                             ->join('jenis_material', 'material.id_jenis_material = jenis_material.id')
