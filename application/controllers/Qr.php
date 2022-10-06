@@ -19,12 +19,10 @@ class Qr extends CI_Controller
     $data['title'] = $this->title . " | " . $id_material;
 
 
-    $where['a.id'] = $id_material;
-    $data['material'] = $this->material_model->by($where)->row_array();
+    $data['material'] = $this->material_model->by([
+      'material.id' => $id_material
+    ])->row_array();
 
-    // $this->load->view('templates/header.php', $data);
     $this->load->view('pages/cetak-qr.php', $data);
-    // $this->load->view('templates/footer.php', $data);
-    // $this->load->view('functions/'. $this->page .'.php');
   }
 }

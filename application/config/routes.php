@@ -13,7 +13,7 @@ $route['default_controller'] = 'pages/';
 $route['dashboard'] = 'dashboard';
 $route['dashboard/get-data'] = 'dashboard/get_data';
 
-// List Proyek
+// Proyek
   $route['proyek'] = 'proyek';
   $route['proyek/create'] = 'proyek/create';
   $route['proyek/edit'] = 'proyek/edit';
@@ -32,9 +32,9 @@ $route['dashboard/get-data'] = 'dashboard/get_data';
   $route['cetak-qr/(:any)'] = 'qr/index/$1';
 
 // Loading Masuk
-  $route['loading-masuk'] = 'loading_masuk';
-  $route['loading-masuk/create'] = 'loading_masuk/create';
-  $route['loading-masuk/delete'] = 'loading_masuk/delete';
+  $route['loading-masuk']             = 'loading_masuk';
+  $route['loading-masuk/create']      = 'loading_masuk/create';
+  $route['loading-masuk/delete']      = 'loading_masuk/delete';
   $route['loading-masuk/scan/(:any)'] = 'loading_masuk/scan/$1';
   $route['loading-masuk/scan-proses'] = 'loading_masuk/scan_proses';
 
@@ -47,9 +47,9 @@ $route['dashboard/get-data'] = 'dashboard/get_data';
 
 // Loading Return
   $route['loading-return'] = 'loading_return';
-  $route['loading-return/validasi'] = 'loading_return/validasi';
+  $route['loading-return/create'] = 'loading_return/create';
   $route['loading-return/delete'] = 'loading_return/delete';
-  $route['loading-return/scan'] = 'loading_return/scan';
+  $route['loading-return/scan/(:any)'] = 'loading_return/scan/$1';
   $route['loading-return/scan-proses'] = 'loading_return/scan_proses';
   $route['loading-return/get-data'] = 'loading_return/get_data';
 

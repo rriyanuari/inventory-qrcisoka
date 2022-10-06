@@ -18,9 +18,10 @@
     }
 
     let form_data = new FormData();
-    form_data.append('id', id);
+    form_data.append('id_loading', id);
     form_data.append('id_proyek', id_proyek.val());
     form_data.append('keterangan', keterangan.val());
+    // form_data.append('scans', JSON.stringify(scans));
 
     $.ajax({
       url: '<?php echo base_url('loading-keluar/validasi') ?>',

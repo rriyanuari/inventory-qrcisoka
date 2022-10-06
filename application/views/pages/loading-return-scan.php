@@ -6,20 +6,20 @@
     </div>
     <div class="section-body">
       <div class="container-fluid">
-        <div class="row align-items-center justify-content-between">
-          <div class="form-group col-sm-4 col-md-2">
-            <label> ID Loading</label>
-            <input type="text" class="form-control" id="id_loading" value="<?= $loading['id']; ?>" disabled>
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="form-group col-md-2">
+            <label> ID Jenis Material : </label>
+            <input type="text" size="5" class="form-control" id="id_jenis_material" value="<?= $material['id_jenis_material']; ?>" disabled>
           </div>
-          <div class="form-group col-sm-8 col-md-4">
-            <label>Nama Material</label>
-            <input type="text" class="form-control" id="jenis_material" value="<?= $material['nama']; ?>" disabled>
+          <div class="form-group col-md-4">
+            <label> </label>
+            <input type="text" size="5" class="form-control" id="jenis_material" value="<?= $material['nama']; ?>" disabled>
           </div>
-          <div class="form-group col-sm-12 col-md-2">
-            <label> ID Material</label>
-            <input type="text" class="form-control" id="id_material" value="<?= $material['id'] ?>" disabled>
+          <div class="form-group col-md-2">
+            <label> ID Material : </label>
+            <input type="text" size="5" class="form-control" id="id_material" value="<?= $material['id'] ?>" disabled>
           </div>
-          <div class="form-group col-sm-12 col-md-4">
+          <div class="form-group col-md-4">
             <label>Tgl Kadaluarsa</label>
             <input type="date" class="form-control" name="tgl_kadaluarsa" min="<?= date("Y-m-d"); ?>">
           </div>
@@ -44,13 +44,13 @@
             </section>
             <section class="scans">
               <h5 class="bg-primary text-light p-2 d-flex">Scans
-                <span class="badge badge-light ml-auto"><span id="qty_material">{{ scans.length }}</span> / <?= $material['qty'] ?><span>
+                <span class="badge badge-light ml-auto"><span id="qty_material">{{ scans.length }}</span> / <?= ($material['qty'] < 1) ? 1 : 0; ?><span>
               </h5>
 
               <ul v-if="scans.length === 0">
                 <li class="empty">No scans yet</li>
               </ul>
-              <ul v-if="scans.length == <?= $material['qty'] ?>">
+              <ul v-if="scans.length == <?= ($material['qty'] < 1) ? 1 : 0; ?>">
                 <li><button class="btn btn-block btn-success" id="tmb-simpan" onclick="simpan()">Simpan</button></li>
               </ul>
               <transition-group name="scans" tag="ul">

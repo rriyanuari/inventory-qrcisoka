@@ -24,7 +24,6 @@
                   </thead>
                   <tbody>
                     <?php
-                    $no = 1;
                     foreach ($jenis_materials as $jenis_material) :
 
                       $total_qty = 0;
@@ -43,7 +42,6 @@
                         </td>
                       </tr>
                     <?php
-                      $no++;
                     endforeach;
                     ?>
 
@@ -89,12 +87,8 @@ foreach ($jenis_materials as $jenis_material) :
                   <td width="70%">: <?= $jenis_material['id'] . ' - ' . $jenis_material['nama'] ?></td>
                 </tr>
                 <tr class="row py-2">
-                  <td width="30%">Satuan</td>
-                  <td width="70%">: <?= $jenis_material['satuan'] ?></td>
-                </tr>
-                <tr class="row py-2">
                   <td width="30%">Total Qty</td>
-                  <td width="70%">: <?= $total_qty ?></td>
+                  <td width="70%">: <?= number_format($total_qty, 2, ',', '.') . " " . $jenis_material['satuan']; ?> </td>
                 </tr>
               </table>
               <hr>
@@ -122,7 +116,7 @@ foreach ($jenis_materials as $jenis_material) :
                   <td width="5%"><?= $material['id'] ?></td>
                   <td class="text-right"><?= date('d-m-Y', strtotime($material['tgl_valid'])); ?></td>
                   <td class="text-right"><?= date('d-m-Y', strtotime($material['tgl_kadaluarsa'])); ?></td>
-                  <td class="text-right"><?= number_format($material['qty'], 2, ',', '.') ?></td>
+                  <td class="text-right"><?= number_format($material['qty'], 2, ',', '.') . " " . $jenis_material['satuan']; ?></td>
                   <td width="10%" class="project-actions align-middle">
                     <a class="btn btn-primary btn-sm text-light" href="<?= base_url('cetak-qr/') . $material['id'] ?>" target="_blank">
                       <i class="fas fa-qrcode">

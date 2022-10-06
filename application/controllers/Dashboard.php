@@ -32,7 +32,8 @@ class Dashboard extends CI_Controller
   {
     $data['title'] = $this->title;
 
-    $materials = $this->material_model->semua()->result_array();
+    $materials = $this->material_model->by(['status' => 1])->result_array();
+    die(var_dump($materials));
     $total_material = 0;
     foreach ($materials as $material) :
       $total_material += $material['qty'];
@@ -48,9 +49,13 @@ class Dashboard extends CI_Controller
       $loading_masuk_bulanan = 0;
       $loading_keluar_bulanan = 0;
 
+      if($month < 10) {
+        $month = "0" . $month;
+      }
+
       foreach ($loadings as $loading) :
 
-        if (date_format(date_create($loading['tgl_valid']), "Y-m") == "2022-0" . $month) {
+        if (date_format(date_create($loading['tgl_valid']), "Y-m") == "2022-" . $month) {
           if ($loading['type'] == "Masuk") {
             $loading_masuk_bulanan  += $loading['qty_loading'];
           }
@@ -70,8 +75,7 @@ class Dashboard extends CI_Controller
     foreach ($loadings as $loading) :
       $item = $loading;
 
-      $where['a.id'] = $loading['id_material'];
-      $item['material'] = $this->material_model->by($where)->row_array();
+      $item['material'] = $this->material_model->by(['material.id' => $loading['id_material']])->row_array();
       array_push($loadings_merge, $item);
     endforeach;
 

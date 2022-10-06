@@ -16,7 +16,7 @@ class Material extends CI_Controller
   }
 
   public function index()
-  { 
+  {
     $data['title'] = $this->title;
     $jenis_materials = $this->jenis_material_model->semua()->result_array();
 
@@ -25,18 +25,19 @@ class Material extends CI_Controller
     foreach ($jenis_materials as $jenis_material) :
       $item = $jenis_material;
 
-      $where['id_jenis_material'] = $jenis_material['id'];
-      $where['status'] = 1;
-      $item['materials'] = $this->material_model->by($where)->result_array();
+      $item['materials'] = $this->material_model->by([
+        'id_jenis_material' => $jenis_material['id'],
+        'status' => 1,
+        'type' => 'Masuk'
+      ])->result_array();
+
       array_push($data_merge, $item);
     endforeach;
 
     $data['jenis_materials'] = $data_merge;
 
     $this->load->view('templates/header.php', $data);
-    $this->load->view('pages/'. $this->page .'.php', $data);
+    $this->load->view('pages/' . $this->page . '.php', $data);
     $this->load->view('templates/footer.php', $data);
-    // $this->load->view('functions/'. $this->page .'.php');
   }
-
 }

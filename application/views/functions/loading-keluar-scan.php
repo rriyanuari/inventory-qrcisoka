@@ -8,14 +8,6 @@
       exist: false,
       scans: []
     },
-    methods: {
-      greet: function (event) {
-        // `this` inside methods point to the Vue instance
-        alert('Hello ' + this.name + '!')
-        // `event` is the native DOM event
-        alert(event.target.tagName)
-      }
-    },
     mounted: function() {
       var self = this;
       self.scanner = new Instascan.Scanner({
@@ -27,13 +19,14 @@
 
         // Split content (isi qrcode)
         split_content = content.split("/");
+      
         // variabel isi qrcode siap disimpan
-        content = `${split_content[6]}/${split_content[7]}`;
+        content = `${split_content[5]}/${split_content[6]}`;
 
         self.exist = false
 
         // Validasi benar qr fyfe?
-        if (split_content.length != 8) {
+        if (split_content.length != 7) {
           self.exist = true;
           var audio = new Audio(`<?= base_url('assets/qrscan/') ?>failure.mp3`);
           audio.play();
@@ -107,9 +100,12 @@
       })
       .then((willDelete) => {
         if (willDelete) {
-          console.log("item yang index nya = " + index + " sudah dihapus");
+          iziToast.success({
+            title: 'Success!',
+            message: "Material berhasil dihapus dari daftar scan",
+            position: 'topRight'
+          });
           app.scans.splice(index, 1);
-          console.log(app.scans)
         }
       });
   }
@@ -119,7 +115,7 @@
 
     // SET DATA SCANNED
     let materials = [];
-    
+
     $('.hasilscan').each(function() {
       let no_qr = $(this).val()
       let split_material = no_qr.split("/")
@@ -127,7 +123,7 @@
       let material = {}
 
       material['id_material'] = split_material[0]
-      material['id_scan'] = split_material[1]
+      material['id_qr'] = split_material[1]
       material['no_qr'] = no_qr;
 
       materials.push(material)

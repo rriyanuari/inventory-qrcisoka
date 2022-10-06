@@ -47,36 +47,34 @@
                 <table class="table table-striped datatables">
                   <thead>
                     <tr>
-                      <th width="5%" class="text-center">#</th>
+                      <th width="5%" class="text-center">ID Loading</th>
                       <th width="" class="text-center">Jenis Material</th>
                       <th width="15%" class="text-center">Qty</th>
                       <th width="15%" class="text-center">Tgl Permintaan</th>
-                      <th width="15%" class="text-center">Valid</th>
                       <th width="15%" class="text-center">Action</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php
-                      $no = 0;
-                      foreach($materials as $material):
-                        $no += 1;
+                      foreach($loadings as $loading):
                     ?>
                       <tr>
-                        <td class="text-center"><?= $material['id']; ?></td>
-                        <td class=""><?= $material['nama_jenis_material']; ?></td>
-                        <td class="text-center"><?= $material['qty']; ?></td>
-                        <td class="text-center"><?= date('d-m-Y | h:i A', strtotime($material['tgl_permintaan'])); ?></td>
-                        <td class="text-center"><?= $material['valid'] . " / " . $material['qty']; ?></td>
+                        <td class="text-center"><?= $loading['id']; ?></td>
+                        <td class=""><?= $loading['material']['nama']; ?></td>
+                        <td class="text-right">
+                          <?= number_format($loading['qty_loading'], 2, ',', '.') . " " . $loading['material']['satuan']; ?>
+                        </td>
+                        <td class="text-center"><?= date('d-m-Y | h:i A', strtotime($loading['tgl_permintaan'])); ?></td>
                         <td class="text-center">
-                          <a class="btn btn-primary btn-sm text-light" data-toggle="tooltip" data-original-title="Cetak QR" href="<?= base_url('cetak-qr/') . $material['id'] ?>" target="_blank">
+                          <a class="btn btn-primary btn-sm text-light" data-toggle="tooltip" data-original-title="Cetak QR" href="<?= base_url('cetak-qr/') . $loading['material']['id'] ?>" target="_blank">
                             <i class="fas fa-qrcode"></i>
                             </i>
                           </a>
-                          <a class="btn btn-success btn-sm text-light" data-toggle="tooltip" data-original-title="Validasi permintaan" href="<?= base_url('loading-masuk/scan/') . $material['id'] ?>">
+                          <a class="btn btn-success btn-sm text-light" data-toggle="tooltip" data-original-title="Validasi permintaan" href="<?= base_url('loading-masuk/scan/') . $loading['id'] ?>">
                             <i class="fas fa-check-circle"></i>
                             </i>
                           </a>
-                          <button class="btn btn-sm btn-danger btn-delete" data-toggle="tooltip" data-original-title="Tolak permintaan" id="<?= $material['id']; ?>">
+                          <button class="btn btn-sm btn-danger btn-delete" data-toggle="tooltip" data-original-title="Tolak permintaan" id="<?= $loading['id']; ?>">
                             <i class="fas fa-times-circle"></i>
                           </button>
                         </td>

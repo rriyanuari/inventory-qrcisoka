@@ -6,7 +6,7 @@
         $query = $this->db  ->select('b.id, a.id_material, b.type, b.tgl_valid, 
                                       a.total_qty_awal, a.qty_loading, a.total_qty_akhir')
                             ->from('loading_detail a')
-                            ->join('loading b', 'a.id_loading = b.id', 'left')
+                            ->join('loading b', 'a.id_loading = b.id')
                             ->order_by('b.tgl_valid', 'DESC');
         $query = $this->db->get(); 
         return $query;
@@ -17,12 +17,32 @@
                             ->order_by("id", "desc")
                             ->get('loading');
         return $query;
-    }
+      }
 
-      public function by($where){
+      public function by_satuan($where){
         $query = $this->db  ->select('*')
                             ->from('loading')
                             ->where($where);
+        $query = $this->db->get(); 
+        return $query;
+      }
+
+      public function by($where){
+        $query = $this->db  ->select('DISTINCT(loading.id), loading.type, loading.tgl_permintaan,
+                                    loading_detail.id_material, loading_detail.qty_loading')
+                            ->from('loading')
+                            ->join('loading_detail', 'loading_detail.id_loading = loading.id')
+                            ->where($where);
+        $query = $this->db->get(); 
+        return $query;
+      }
+
+      public function permintaan_validasi($type){
+        $query = $this->db  ->select('a.id, a.type, b.id_material, b.qty_loading, a.tgl_permintaan')
+                            ->from('loading a')
+                            ->join('loading_detail b', 'b.id_loading = a.id')
+                            ->where('a.is_valid', 0)
+                            ->where('a.type', $type);
         $query = $this->db->get(); 
         return $query;
       }
@@ -31,9 +51,9 @@
         $query = $this->db  ->select('b.id, a.id_material, b.type, b.tgl_valid, 
                                       a.total_qty_awal, a.qty_loading, a.total_qty_akhir')
                             ->from('loading_detail a')
-                            ->join('loading b', 'a.id_loading = b.id', 'left')
-                            ->where('a.id_material = ' . $id)  
-                            ->where("DATE_FORMAT(b.tgl_valid,'%Y-%m') = ", $periode);
+                            ->join('loading b', 'a.id_loading = b.id')
+                            ->where('a.id_material', $id)  
+                            ->where("DATE_FORMAT(b.tgl_valid,'%Y-%m')", $periode);
         $query = $this->db->get(); 
         return $query;
       }
@@ -42,7 +62,7 @@
         $query = $this->db  ->select('b.id, a.id_material, b.type, b.tgl_valid, 
                                       a.total_qty_awal, a.qty_loading, a.total_qty_akhir')
                             ->from('loading_detail a')
-                            ->join('loading b', 'a.id_loading = b.id', 'left')
+                            ->join('loading b', 'a.id_loading = b.id')
                             ->where('a.id_material = ' . $id);
         $query = $this->db->get(); 
         return $query;

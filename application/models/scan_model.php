@@ -44,7 +44,7 @@
 
       public function by_and_join($where){
         $query = $this->db  ->select('scan.id, scan.id_material, scan.no_qr,
-                                      jenis_material.nama,
+                                      jenis_material.nama, jenis_material.satuan,
                                       COUNT(jenis_material.nama) AS qty')
                             ->from('scan')
                             ->join('material', 'scan.id_material = material.id')

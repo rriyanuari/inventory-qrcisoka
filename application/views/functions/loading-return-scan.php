@@ -121,13 +121,13 @@
     }
 
     var form_data = new FormData();
-    form_data.append('id_loading', $("#id_loading").val());
     form_data.append('id_material', $("#id_material").val());
+    form_data.append('id_jenis_material', $("#id_jenis_material").val());
     form_data.append('qty', $("#qty_material").html());
     form_data.append('tgl_kadaluarsa', tgl_kadaluarsa.val());
 
     $.ajax({
-      url: '<?php echo base_url('loading-masuk/scan-proses') ?>',
+      url: '<?php echo base_url('loading-return/scan-proses') ?>',
       dataType: 'json', // what to expect back from the PHP script, if anything
       cache: false,
       contentType: false,
@@ -137,14 +137,13 @@
       success: function(data, status) {
         if (data.status == 'success') {
           swal('Success', `${data.msg}`, 'success').then(function() {
-            $(location).attr('href', `<?= base_url('loading-masuk') ?>`); // redirect setelah sukses
+            $(location).attr('href', `<?= base_url('loading-return') ?>`); // redirect setelah sukses
           })
 
         } else {
           swal('Error', `${data.msg}`, 'error');
           tgl_kadaluarsa.focus();
         }
-        console.log(data);
       },
       error: function(data) {
         swal('Error', `${data.msg}`, 'error');

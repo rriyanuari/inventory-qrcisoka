@@ -28,15 +28,12 @@
                   </thead>
                   <tbody>
                     <?php
-                    // print("<pre>".print_r($loadings,true)."</pre>");
-                    $no = 0;
                     foreach ($loadings as $loading) :
                       $loading['total_qty'] = 0;
 
                       foreach ($loading['scans'] as $scan) :
                         $loading['total_qty'] += $scan['qty'];
                       endforeach;
-                      $no += 1;
                     ?>
                       <tr class="">
                         <td class="text-center align-middle"><?= $loading['id']; ?></td>
@@ -44,7 +41,7 @@
                           <div id="accordion<?= $loading['id'] ?>">
                             <div class="accordion">
                               <div class="accordion-header collapsed py-4" role="button" data-toggle="collapse" data-target="#panel-body-<?= $loading['id'] ?>" aria-expanded="false">
-                                <h4><?= date('d-m-Y | h:i A', strtotime($loading['tgl_scan'])); ?></h4>
+                                <h4><?= date('d-m-Y | h:i A', strtotime($loading['tgl_permintaan'])); ?></h4>
                               </div>
                               <div class="accordion-body collapse" id="panel-body-<?= $loading['id'] ?>" data-parent="#accordion<?= $loading['id'] ?>">
                                 <table class="table table-striped">
@@ -59,8 +56,8 @@
                                     foreach ($loading['scans'] as $scan) :
                                     ?>
                                       <tr>
-                                        <td><?= $scan['nama'] ?> ( <em><?= $scan['id_material']; ?><em> )</td>
-                                        <td><?= $scan['qty'] ?></td>
+                                        <td><?= $scan['nama'] ?> ( <em id="id_material<?=$loading['id']?>"><?= $scan['id_material']; ?></em> )</td>
+                                        <td><span id="qty_scan<?=$loading['id']?>"><?= number_format($scan['qty'], 2, ',', '.'); ?></span> <?= $scan['satuan']?></td>
                                       </tr>
                                     <?php endforeach; ?>
                                   </tbody>
@@ -69,7 +66,7 @@
                             </div>
                           </div>
                         </td>
-                        <td class="text-center align-middle"><?= $loading['total_qty']; ?></td>
+                        <td class="text-center align-middle"><?= $loading['total_qty']; ?> Material</td>
                         <td class="text-center align-middle">
                           <a class="btn btn-success btn-sm text-light" data-toggle="modal" data-target="#validasi_modal<?= $loading['id']; ?>">
                             <i class="fas fa-check-circle"></i>
@@ -118,11 +115,11 @@ foreach ($loadings as $loading) :
         <br />
         <div class="row">
           <div class="col-md-3">Waktu scan</div>
-          <div>: <?= date('d-m-Y | h:i A', strtotime($loading['tgl_scan'])); ?></div>
+          <div>: <?= date('d-m-Y | h:i A', strtotime($loading['tgl_permintaan'])); ?></div>
         </div>
         <div class="row">
           <div class="col-md-3">Total Qty</div>
-          <div>: <?= $loading['total_qty'] ?> material</div>
+          <div>: <?= number_format($loading['total_qty'], 2, ',', '.') ?> material</div>
         </div>
         <hr />
         <div class="form-group col-md-12">
@@ -158,7 +155,7 @@ foreach ($loadings as $loading) :
                   ?>
                     <tr>
                       <td><?= $scan['nama'] ?> ( <em><?= $scan['id_material']; ?><em> )</td>
-                      <td><?= $scan['qty'] ?></td>
+                      <td><?= number_format($scan['qty'], 2, ',', '.') . " " . $scan['satuan']?></td>
                     </tr>
                   <?php endforeach; ?>
                 </tbody>

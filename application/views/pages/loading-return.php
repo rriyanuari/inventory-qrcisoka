@@ -40,27 +40,22 @@
                         </select>
                       </div>
                       <div class="form-group col-md-3 col-sm-6">
-                        <label>Satuan</label>
-                        <input type="text" class="form-control" name="satuan" disabled value="-">
-                      </div>
-                      <div class="form-group col-md-3 col-sm-6">
                         <label>Qty</label>
                         <input type="number" class="form-control" name="qty" placeholder="0" min="0" disabled>
                       </div>
                       <div class="form-group col-md-3 col-sm-6">
-                        <label>Satuan Konversi</label>
-                        <input type="text" class="form-control" name="satuan_konversi" disabled value="-">
+                        <label>Satuan</label>
+                        <input type="text" class="form-control" name="satuan" disabled value="-">
                       </div>
                       <div class="form-group col-md-3 col-sm-6">
                         <label>Qty Konversi</label>
                         <input type="number" class="form-control" name="qty_konversi" placeholder="0" min="0" disabled>
                       </div>
-                      <!-- <div class="form-group col-md-6">
-                        <label>Tgl Kadaluarsa</label>
-                        <input type="date" class="form-control" name="tgl_kadaluarsa" min="<?= date("Y-m-d"); ?>" value="<?= date("Y-m-d"); ?>">
-                      </div> -->
+                      <div class="form-group col-md-3 col-sm-6">
+                        <label>Satuan Konversi</label>
+                        <input type="text" class="form-control" name="satuan_konversi" disabled value="-">
+                      </div>
                     </div>
-
                     <button type="submit" class="btn btn-success btn-add">Tambahkan</button>
 
                   </div>
@@ -75,32 +70,29 @@
                       <th width="" class="text-center">Jenis Material</th>
                       <th width="15%" class="text-center">Qty</th>
                       <th width="15%" class="text-center">Tgl Permintaan</th>
-                      <th width="15%" class="text-center">Valid</th>
                       <th width="15%" class="text-center">Action</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php
-                      $no = 0;
-                      foreach($materials as $material):
-                        $no += 1;
+                    var_dump($loadings);
+                      foreach($loadings as $loading):
                     ?>
                       <tr>
-                        <td class="text-center"><?= $material['id']; ?></td>
-                        <td class=""><?= $material['nama_jenis_material']; ?></td>
-                        <td class="text-center"><?= $material['qty']; ?></td>
-                        <td class="text-center"><?= date('d-m-Y | h:i A', strtotime($material['tgl_permintaan'])); ?></td>
-                        <td class="text-center"><?= $material['valid'] . " / " . $material['qty']; ?></td>
+                        <td class="text-center"><?= $loading['id']; ?></td>
+                        <td class=""><?= $loading['nama_jenis_loading']; ?></td>
+                        <td class="text-center"><?= $loading['qty']; ?></td>
+                        <td class="text-center"><?= date('d-m-Y | h:i A', strtotime($loading['tgl_permintaan'])); ?></td>
                         <td class="text-center">
-                          <a class="btn btn-primary btn-sm text-light" data-toggle="tooltip" data-original-title="Cetak QR" href="<?= base_url('cetak-qr/') . $material['id'] ?>" target="_blank">
+                          <a class="btn btn-primary btn-sm text-light" data-toggle="tooltip" data-original-title="Cetak QR" href="<?= base_url('cetak-qr/') . $loading['id'] ?>" target="_blank">
                             <i class="fas fa-qrcode"></i>
                             </i>
                           </a>
-                          <a class="btn btn-success btn-sm text-light" data-toggle="tooltip" data-original-title="Validasi permintaan" href="<?= base_url('loading-return/scan/') . $material['id'] ?>">
+                          <a class="btn btn-success btn-sm text-light" data-toggle="tooltip" data-original-title="Validasi permintaan" href="<?= base_url('loading-return/scan/') . $loading['id'] ?>">
                             <i class="fas fa-check-circle"></i>
                             </i>
                           </a>
-                          <button class="btn btn-sm btn-danger btn-delete" data-toggle="tooltip" data-original-title="Tolak permintaan" id="<?= $material['id']; ?>">
+                          <button class="btn btn-sm btn-danger btn-delete" data-toggle="tooltip" data-original-title="Tolak permintaan" id="<?= $loading['id']; ?>">
                             <i class="fas fa-times-circle"></i>
                           </button>
                         </td>
